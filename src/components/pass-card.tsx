@@ -1,23 +1,44 @@
 import { Pass } from '@/types'
 import { Button } from '@/components/ui/button'
 import { QRCodeDisplay } from '@/components/qr-code-display'
+import { BentoCard } from './magicui/bento-grid-pass'
+import { cn } from '@/lib/utils'
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/components/ui/tabs'
+import { Card } from '@/components/components/ui/card'
 
-export function PassCard({ pass, onCancel }: { pass: Pass; onCancel?: (id: string) => void }) {
+interface PassCardProps {
+  pass: Pass;
+  onCancel?: (id: string) => void;
+  className?: string;
+  style?: React.CSSProperties;
+}
+
+export function PassCard({ pass, onCancel, className = '', style = {} }: PassCardProps) {
   return (
-    <div className="rounded-lg border p-4">
-      <div className="flex items-center justify-between">
-        <div>
-          <div className="font-semibold">{pass.eventTitle}</div>
-          <div className="text-sm text-muted-foreground">{new Date(pass.startTime).toLocaleString()}</div>
-          <div className="text-xs mt-1">Status: {pass.status}</div>
-        </div>
+    <Card className={cn('p-4', className)}>
+      <Tabs defaultValue="Event">
+      <TabsList>
+        <TabsTrigger value="Event">Event</TabsTrigger>
+        <TabsTrigger value="Pass">Pass</TabsTrigger>
+      </TabsList>
+      <TabsContent value="Event">
+        <BentoCard
+          name={pass.eventTitle}
+          date={pass.date}
+          startTime={pass.startTime}
+          endTime={pass.endTime}
+          href={`/passes/${pass.id}`}
+          price={pass.status}
+          venue={pass.venue}
+          className={cn('w-[290px] h-[320px]', className)}
+          style={style} 
+          background={<img src={pass.background} alt="" className="h-full w-full object-cover" />}
+        />
+      </TabsContent>
+      <TabsContent value="Pass">
         <QRCodeDisplay value={pass.qr} />
-      </div>
-      {pass.status === 'reserved' && (
-        <div className="mt-3">
-          <Button variant="outline" onClick={() => onCancel?.(pass.id)}>Cancel Pass</Button>
-        </div>
-      )}
-    </div>
+      </TabsContent>
+    </Tabs>
+    </Card>
   )
 }

@@ -16,7 +16,6 @@ export default function PassesPage() {
 
   return (
     <div className="space-y-4">
-      <h1 className="text-2xl font-bold">My Passes</h1>
       {isLoading && <Loading />}
       <div className="grid grid-cols-1 gap-3">
         {data?.passes?.map((p) => (
