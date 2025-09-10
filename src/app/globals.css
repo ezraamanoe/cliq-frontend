@@ -59,15 +59,31 @@
   }
 
   * {
-    @apply border-border;
+    border-color: hsl(var(--border));
   }
   
   body {
-    @apply bg-background text-foreground;
+    background-color: hsl(var(--background));
+    color: hsl(var(--foreground));
+  }
+  
+  /* Custom text selection styles */
+  ::selection {
+    background: #f81ce5;
+    color: white;
+  }
+  
+  /* For Firefox */
+  ::-moz-selection {
+    background: #f81ce5;
+    color: white;
   }
 }
 
 /* Utilities */
 .container {
-  @apply mx-auto px-4;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1rem;
+  padding-right: 1rem;
 }

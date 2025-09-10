@@ -53,7 +53,7 @@ export function Filters({ selectedCategory }: FiltersProps) {
         <PopoverTrigger asChild>
           <Button variant="secondary" size="sm" className="flex items-center gap-2"><MapPinIcon />Location</Button>
         </PopoverTrigger>
-        <PopoverContent align="start">
+        <PopoverContent align="start" className="w-auto overflow-hidden p-0">
           <Command>
             <CommandInput
               placeholder="Search city..."
@@ -91,7 +91,7 @@ export function Filters({ selectedCategory }: FiltersProps) {
             ) : 'Date'}
           </Button>
         </PopoverTrigger>
-        <PopoverContent align="start" className="w-auto p-0">
+        <PopoverContent align="start" className="w-auto overflow-hidden p-0">
           <Calendar04 
             dateRange={dateRange || { from: undefined, to: undefined }}
             onSelect={(range) => {

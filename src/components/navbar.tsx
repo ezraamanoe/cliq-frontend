@@ -22,6 +22,7 @@ export function Navbar() {
   const [isVisible, setIsVisible] = useState(true)
   const [prevScrollPos, setPrevScrollPos] = useState(0)
 
+
   useEffect(() => {
     const handleScroll = () => {
       const currentScrollPos = window.pageYOffset
@@ -40,6 +41,8 @@ export function Navbar() {
     return () => window.removeEventListener('scroll', handleScroll)
   }, [prevScrollPos])
 
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
   return (
     <header 
       className={`sticky top-0 z-40 w-full backdrop-blur supports-[backdrop-filter]:bg-background/60 pt-4 pb-4 transition-transform duration-300 ease-in-out ${
@@ -47,9 +50,9 @@ export function Navbar() {
       }`}
     >
       <div className="container h-16 flex items-center justify-between">
-        {/* Logo */}
+        {/* Logo - Always visible */}
         <Link href="/" className="flex items-center">
-          <h1 className="text-5xl font-bold tracking-wider font-anton">CLIQ</h1>
+          <h1 className="text-5xl sm:text-5xl font-bold tracking-wider font-anton">CLIQ</h1>
         </Link>
         
         {/* Desktop Navigation - Right Aligned */}
@@ -62,8 +65,8 @@ export function Navbar() {
                     <NavigationMenuLink className={navigationMenuTriggerStyle()}>
                       Home
                     </NavigationMenuLink>
-                    </Link>
-                  </NavigationMenuItem>
+                  </Link>
+                </NavigationMenuItem>
                 <NavigationMenuItem>
                   <Link href="/passes" legacyBehavior passHref>
                     <NavigationMenuLink className={navigationMenuTriggerStyle()}>
@@ -94,39 +97,36 @@ export function Navbar() {
           </div>
         </div>
 
-        {/* Mobile Navigation */}
-        <div className="md:hidden flex items-center justify-between w-full">
-          <Link href="/" className="flex items-center gap-2">
-            <h1 className="text-3xl font-bold font-anton">CLIQ</h1>
-          </Link>
+        {/* Mobile Menu */}
+        <div className="md:hidden flex items-center">
           <Sheet>
-            <SheetTrigger asChild>
-              <Button variant="ghost" size="lg" className="h-12 w-12">
-                <Menu size={24}/>
-                <span className="sr-only">Toggle menu</span>
+            <div className="flex items-center gap-2">
+              <Button variant="outline" onClick={() => router.push('/login')}>
+                Login
               </Button>
-            </SheetTrigger>
+              <Button variant="default" onClick={() => router.push('/register')}>
+                Sign Up
+              </Button>
+              <SheetTrigger asChild>
+                <Menu className="h-10 w-10 cursor-pointer" />
+              </SheetTrigger>
+            </div>
             <SheetContent side="right" className="w-[300px] sm:w-[400px]">
-              <nav className="flex flex-col gap-4 mt-8">
-                <Link href="/" className="text-lg font-medium hover:underline">
+              <nav className="flex flex-col gap-6 mt-8">
+                <Link 
+                  href="/" 
+                  className="text-lg hover:underline"
+                  onClick={() => setIsMenuOpen(false)}
+                >
                   Home
                 </Link>
-                <Link href="/passes" className="text-lg font-medium hover:underline">
+                <Link href="/passes" className="text-lg hover:underline">
                   My Passes
                 </Link>
-                <Link href="/profile" className="text-lg font-medium hover:underline">
+                <Link href="/profile" className="text-lg hover:underline">
                   Profile
                 </Link>
                 <div className="flex items-center gap-4 mt-4 pt-4 border-t">
-                  <Link href="/login" className="text-sm font-medium hover:underline">
-                    Login
-                  </Link>
-                  <Link 
-                    href="/register" 
-                    className="text-sm font-medium bg-foreground text-background px-4 py-2 rounded-md hover:bg-black/80 transition-colors"
-                  >
-                    Sign Up
-                  </Link>
                 </div>
               </nav>
             </SheetContent>

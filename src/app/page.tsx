@@ -6,7 +6,7 @@ import { Input } from '@/components/components/ui/input'
 import { Skeleton } from '@/components/components/ui/skeleton'
 import { CategoryFilter } from '@/components/category-filter'
 import { useMemo, useState } from 'react'
-import { Search } from 'lucide-react'
+import { MessageSquare, MessageSquareQuote, OctagonAlert, Quote, Search, Trash2 } from 'lucide-react'
 import { Filters } from '@/components/filters'
 
 export default function HomePage() {
@@ -48,16 +48,16 @@ export default function HomePage() {
   }, [data, selectedCategory, location])
 
   return (
-    <div className="flex flex-col">
+    <div className="flex flex-col min-h-screen">
 
-      <div className="grid grid-cols-2 gap-2">
-        <div className="relative">
+      <div className="grid grid-cols-1 gap-2">
+        <div className="relative w-full">
           <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
           <Input 
             placeholder="Search by event, venue or category" 
             value={location} 
             onChange={(e) => setLocation(e.target.value)}
-            className="pl-10"
+            className="pl-10 w-full"
           />
         </div>
       </div>
@@ -78,6 +78,7 @@ export default function HomePage() {
         <h1 className="text-4xl">Popular Events in {location}</h1>
       </div> */}
 
+      <div className="flex-1">
       {isLoading ? (
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mt-8">
           {/* Mobile: 2 items, Tablet: 4 items, Desktop: 6 items */}
@@ -123,12 +124,17 @@ export default function HomePage() {
               ))}
             </div>
           ) : (
-            <div className="flex-1 flex items-center justify-center">
-              <p className="text-sm text-muted-foreground">No events match your filters.</p>
+            <div className="flex-1 flex pt-40 flex-col items-center justify-center">
+              <div className="flex flex-col items-center">
+                <OctagonAlert strokeWidth={1} className="h-24 w-24 p-0 m-0" />
+                <h2 className="mt-4 text-2xl font-semibold">No events found</h2>
+                <p className="mt-2 text-sm text-muted-foreground">Try adjusting your filters or search for something else</p>
+              </div>
             </div>
           )}
         </>
       )}
+    </div>
     </div>
   )
 }
