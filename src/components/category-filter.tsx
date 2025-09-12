@@ -1,6 +1,6 @@
 "use client"
 
-import { Briefcase, Calendar, CloudMoon, Dumbbell, Handshake, Flame, Globe, Music, Palette} from 'lucide-react'
+import { Briefcase, Calendar, CloudMoon, Dumbbell, Handshake, Flame, Globe, Music, Palette, Cpu, Trees, Cherry, GraduationCap, TentTree} from 'lucide-react'
 
 interface CategoryFilterProps {
   selectedCategory: string
@@ -19,14 +19,19 @@ const categoryIcons: Record<string, JSX.Element> = {
   'Business': <Briefcase strokeWidth={1} className={iconClass} />,
   'Sports': <Dumbbell strokeWidth={1} className={iconClass} />,
   'Art': <Palette strokeWidth={1} className={iconClass} />,
-  'Hot': <Flame strokeWidth={1} className={iconClass} />
+  'Hot': <Flame strokeWidth={1} className={iconClass} />,
+  'Technology': <Cpu strokeWidth={1} className={iconClass} />,
+  'Environment': <Trees strokeWidth={1} className={iconClass} />,
+  'Food': <Cherry strokeWidth={1} className={iconClass} />,
+  'Academic': <GraduationCap strokeWidth={1} className={iconClass} />,
+  'Outdoors': <TentTree strokeWidth={1} className={iconClass} />,
 }
 
 export function CategoryFilter({ selectedCategory, onSelectCategory, categories }: CategoryFilterProps) {
   return (
     <div className="relative">
       <div className="flex items-start pb-2 overflow-x-auto no-scrollbar">
-        {['All', 'Tonight', 'This Week'].map((category) => (
+        {['All'].map((category) => (
           <div key={category} className="flex flex-col items-center">
             <button
               onClick={() => onSelectCategory(category === 'All' ? 'all' : category)}
@@ -44,7 +49,7 @@ export function CategoryFilter({ selectedCategory, onSelectCategory, categories 
           </div>
         ))}
         
-        {categories.filter(cat => !['All', 'Tonight', 'This Week'].includes(cat)).map((category) => (
+        {categories.filter(cat => !['All'].includes(cat)).map((category) => (
           <div key={category} className="flex flex-col items-center">
             <button
               onClick={() => onSelectCategory(category)}

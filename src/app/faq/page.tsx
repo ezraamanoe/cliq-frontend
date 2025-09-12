@@ -1,7 +1,6 @@
 'use client';
 
 import { useState } from 'react';
-import FaqsTwo from '@/components/faqs-2';
 import FaqsThree from '@/components/faqs-3';
 
 export default function FAQPage() {
@@ -12,6 +11,8 @@ export default function FAQPage() {
   };
 
   return (
-    <FaqsThree />
-);
+    <div className="container py-4">
+      <FaqsThree />
+    </div>
+  );
 }

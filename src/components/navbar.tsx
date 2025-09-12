@@ -61,9 +61,9 @@ export function Navbar() {
             <NavigationMenu>
               <NavigationMenuList>
                 <NavigationMenuItem>
-                  <Link href="/" legacyBehavior passHref>
+                  <Link href="/browse" legacyBehavior passHref>
                     <NavigationMenuLink className={navigationMenuTriggerStyle()}>
-                      Home
+                      Browse Events
                     </NavigationMenuLink>
                   </Link>
                 </NavigationMenuItem>

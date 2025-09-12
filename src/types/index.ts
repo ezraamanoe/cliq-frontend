@@ -14,6 +14,16 @@ export interface Event {
   availableTickets?: number
 }
 
+export interface Community {
+  id: string
+  name: string
+  members: string[]
+  description?: string
+  location: string
+  category: string
+  background: string
+}
+
 export type Pass = {
   id: string
   eventId: string

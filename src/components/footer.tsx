@@ -7,7 +7,7 @@ const links = [
     },
     {
         title: 'Contact Us',
-        href: '#',
+        href: '/contact',
     },
     {
         title: 'About Us',

@@ -38,7 +38,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body className={`${anton.variable} font-sans`}>
         <Providers>
           <Navbar />
-          <main className="container py-4 min-h-screen">{children}</main>
+          <main className="min-h-screen">{children}</main>
           <FooterSection />
         </Providers>
       </body>

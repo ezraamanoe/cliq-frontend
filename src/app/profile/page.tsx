@@ -35,7 +35,7 @@ export default function ProfilePage() {
   if (isLoading) return <div className="py-8"><Loading /></div>
 
   return (
-    <div className="max-w-sm mx-auto space-y-4">
+    <div className="container py-4 max-w-sm mx-auto">
       <h1 className="text-2xl font-bold">Profile</h1>
       <form className="space-y-3" onSubmit={form.handleSubmit(onSubmit)}>
         <FormRow>

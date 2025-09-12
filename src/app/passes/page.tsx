@@ -15,7 +15,7 @@ export default function PassesPage() {
   }
 
   return (
-    <div className="space-y-4">
+    <div className="container py-4">
       {isLoading && <Loading />}
       <div className="grid grid-cols-1 gap-3">
         {data?.passes?.map((p) => (

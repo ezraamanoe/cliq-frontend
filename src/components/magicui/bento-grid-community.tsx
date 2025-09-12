@@ -1,9 +1,12 @@
-import { ArrowRightIcon, HeartIcon} from "lucide-react"
-import { ComponentPropsWithoutRef, ReactNode, useState } from "react";
-import { Badge } from "../components/ui/badge";
+"use client";
 
+import { ArrowRightIcon, HeartIcon } from "lucide-react"
+import { ComponentPropsWithoutRef, ReactNode } from "react";
+import { Badge } from "@/components/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
+import { AvatarCirclesDemo } from "../avatar-circles-demo";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/components/ui/avatar";
 
 interface BentoGridProps extends ComponentPropsWithoutRef<"div"> {
   children: ReactNode;
@@ -14,12 +17,12 @@ interface BentoCardProps extends ComponentPropsWithoutRef<"div"> {
   name: string;
   className: string;
   background: ReactNode;
-  venue: string;
-  date: string;
+  description: string;
+  category: string;
+  members: string[];
+  location: string;
   href: string;
-  startTime: string;
-  endTime: string;
-  price: string;
+  logo: string;
 }
 
 const BentoGrid = ({ children, className, ...props }: BentoGridProps) => {
@@ -39,22 +42,15 @@ const BentoGrid = ({ children, className, ...props }: BentoGridProps) => {
 const BentoCard = ({
   name,
   className,
+  description,
+  category,
+  members,
   background,
-  venue,
-  date,
+  logo,
+  location,
   href,
-  startTime,
-  endTime,
-  price,
   ...props
 }: BentoCardProps) => {
-  const [isLiked, setIsLiked] = useState(false);
-
-  const toggleLike = (e: React.MouseEvent) => {
-    e.preventDefault();
-    e.stopPropagation();
-    setIsLiked(!isLiked);
-  };
 
   return (
   <div
@@ -74,33 +70,24 @@ const BentoCard = ({
       {/* Bottom gradient overlay from black to transparent */}
       <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent" />
       <div className="absolute inset-0 shadow-[inset_0_0_60px_0px_rgba(0,0,0,0.8)]" />
-      
-      {/* Like button */}
-      <button
-        onClick={toggleLike}
-        className="absolute top-4 right-4 z-20 p-2 w-10 h-10 flex items-center justify-center rounded-full bg-black/50 backdrop-blur-sm hover:bg-black/70 transition-colors duration-200 focus:outline-none"
-        aria-label={isLiked ? "Unlike" : "Like"}
-      >
-        {isLiked ? (
-          <HeartIcon fill="#ef4444" className="w-6 h-6 text-red-500" />
-        ) : (
-          <HeartIcon className="w-6 h-6 text-white" />
-        )}
-      </button>
     </div>
+
+    <Avatar className="absolute w-10 h-10 top-4 right-4 z-20">
+      <AvatarImage src={logo} />
+      <AvatarFallback>CN</AvatarFallback>
+    </Avatar>
+    
     <div className="absolute inset-x-0 bottom-0 z-10 p-4">
-      {/* Info block that moves up slightly on hover */}
       <div className="pointer-events-none z-10 flex transform-gpu flex-col gap-1 transition-all duration-300 group-hover:-translate-y-2">
         <h3 className="text-2xl font-semibold text-white">
           {name}
         </h3>
         <div>
-          <p className="max-w-lg text-yellow-300 font-light">{date}</p>
-          <p className="max-w-lg text-neutral-200 font-light">{startTime}-{endTime}</p>
-          <p className="max-w-lg text-neutral-400 font-light">{venue}</p>
+          <p className="max-w-lg text-neutral-200 font-light">{category}</p>
+          <p className="max-w-lg text-neutral-400 font-light">{location}</p>
         </div>
-        <div>
-          <Badge variant="secondary" className="bg-white/10 text-white border-white/20">{price}</Badge>
+        <div className="flex justify-between">
+          <AvatarCirclesDemo />
         </div>
       </div>
 
@@ -108,7 +95,7 @@ const BentoCard = ({
       <div className="mt-1 flex items-center justify-between opacity-0 translate-y-2 transition-all duration-300 group-hover:opacity-100 group-hover:translate-y-0">
         <Button variant="link" asChild size="sm" className="pointer-events-auto p-0 text-white">
           <a href={href} className="inline-flex items-center">
-            View event
+            View community
             <ArrowRightIcon className="ms-2 h-4 w-4 rtl:rotate-180" />
           </a>
         </Button>

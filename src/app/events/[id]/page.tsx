@@ -30,7 +30,7 @@ export default function EventPage() {
   })
 
   return (
-    <div className="min-h-screen">
+    <div className="container py-4 min-h-screen">
       <div className="mx-auto max-w-5xl p-6 flex flex-col md:flex-row gap-8">
         {/* Left column: Image + track */}
         <div className="flex flex-col gap-4 md:w-1/3">
